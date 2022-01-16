@@ -17,7 +17,7 @@ function Minmax({date , day , img}) {
     
     return (
         <div className={style.container}>
-           <h2>{days[numDay]}    {date.slice(8)}</h2>
+           <h2 className={style.day}>{days[numDay]}    {date.slice(8)}</h2>
            {img ? <div className={style.img}>
            <img src={img} alt="" />
            </div> : ''}

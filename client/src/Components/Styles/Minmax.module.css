@@ -1,6 +1,6 @@
 .container {
-    height: 150px;
-    width: 200px;
+    height: 10vw;
+    width: 10vw;
     background-color: rgba(138, 126, 126, 0.55);
     border-right: 1px solid white;
     color: white;
@@ -12,17 +12,32 @@
     transition: 1s;
 }
 .img{
-    margin-top: -15%;
+    height: 5vw;
+    width: 5vw;
+    margin-top: -16%;
+    margin-bottom: -10%;
+    margin-left: 23%;
 }
 
 .temp{
     display: flex;
     flex-direction: row;
-    font-size: 20px ;
+    font-size: 1.3vw ;
     color: whitesmoke;
     justify-content: center;
 }
 .temp p {
     padding-left: 5%;
     padding-right: 5%;
+    font-size: 1.2vw ;
+    font-weight: bold;
+    color: whitesmoke;
+    justify-content: center;
+}
+.day{
+    display: flex;
+    flex-direction: row;
+    font-size: 1.5vw ;
+    color: whitesmoke;
+    justify-content: center;
 }
