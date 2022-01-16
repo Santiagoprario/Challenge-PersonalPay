@@ -44,6 +44,15 @@ El servidor se realizo sobre Express. A continuacion se detallan los ENDPOINTS f
 
 **/forecast/:city** ->  Se puede pasar una ciudad por parametro y devolvera los datos de la city y el estado del tiempo a 5 dias.
 
+***El Parametro city puede ser cualquier de las siguientes cosas :***
+
+=> Latitude and Longitude (Decimal degree) ('48.8567,2.3508') <br/>
+=> city name e.g.: q=Paris <br/>
+=> US zip e.g.: q=10001 <br/>
+=> UK postcode e.g: q=SW1 <br/>
+=> Canada postal code e.g: q=G2J <br/>
+=> iata:<3 digit airport code> e.g: q=iata:DXB <br/>
+=> 'auto:ip' Muestra el clima de la ip <br/>
 
 ## FRONTEND TEST
 <hr/>

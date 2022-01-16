@@ -13,7 +13,6 @@ function Weather({name, country, img, temp, condition, forecast, onClose }) {
             <h2 className={style.name}>{name}</h2>
             <h4 className={style.country}>{country}</h4>
             <h1 className={style.temp}>{temp ? temp+'ºC' : ''}</h1>
-            
             </section>  
             { 
               img &&

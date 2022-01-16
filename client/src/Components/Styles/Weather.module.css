@@ -22,7 +22,11 @@
     flex-direction: column;
     justify-content: center;
 }
-
+.main {
+    max-width: 150px;
+    min-width: 150px;
+    text-align: left;
+}
 .country {
     padding-top: -5%;
     margin-top: -10%;

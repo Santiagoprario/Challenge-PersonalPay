@@ -25,7 +25,9 @@ const Reducer = (state=initialState, action) => {
              cityForecast : action.payload,
             }
     case SEARCH_FORECAST :
-         
+        if (state.forecastCities.length === 5) {
+            return state;
+        }
         return {
              ...state,
              forecastCities : state.forecastCities.concat(action.payload),

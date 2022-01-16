@@ -15,7 +15,7 @@ function Search() {
             <input
               className={style.input}
               type="text"
-              placeholder={"Buscar ciudad..."}
+              placeholder={"Busque aqui la ciudad que usted elija. (Max 5 ciudades)"}
               value={city}
               onChange={e => setCity(e.target.value)
               }
