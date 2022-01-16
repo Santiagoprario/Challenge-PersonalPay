@@ -17,3 +17,6 @@ describe('Routes', () => {
 });
 
 
+http://api.weatherapi.com/v1/forecast.json?q=${city}&days=5&lang=es&key=${MY_API_KEY}
+
+

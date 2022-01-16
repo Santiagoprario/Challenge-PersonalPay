@@ -5,7 +5,7 @@ const morgan = require('morgan');
 const { send } = require('process');
 const axios = require('axios');
 
-const MY_API_KEY = '6fe9a0cbe97f467d18fb8f47055d35e0';
+const MY_API_KEY = '4ae0984b70fe4f1fbed15522221601';
 const apiKey = '4ae2636d8dfbdc3044bede63951a019b';
 
 const getIP = require('external-ip')();
@@ -79,7 +79,7 @@ server.get('/v1/current' , async (req, res) => {
        })
        let city = await ciudad;  
         console.log(city)
-        const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&lang=sp&appid=${apiKey}`)
+        const response = await axios.get(`http://api.weatherapi.com/v1/forecast.json?q=${city}&hour=12&days=5&lang=es&key=${MY_API_KEY}`)
         res.json(response.data)   
      }
      catch (err) {
@@ -91,7 +91,7 @@ server.get('/v1/current/:city' , async (req,res) => {
   let citySelected = req.params.city
   if (citySelected) {
     try {
-     const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${citySelected}&units=metric&lang=sp&appid=${apiKey}`)
+     const response = await axios.get(`http://api.weatherapi.com/v1/forecast.json?q=${citySelected}&hour=12&days=5&lang=es&key=${MY_API_KEY}`)
        return res.json(response.data)  
     }
     catch (err) {
@@ -111,7 +111,7 @@ server.get('/v1/forecast' , async (req, res) => {
     })
     let city = await ciudad;  
      console.log(city)
-     const response = await axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&cnt=40&lang=sp&appid=${apiKey}`)
+     const response = await axios.get(`http://api.weatherapi.com/v1/forecast.json?q=${city}&hour=12&days=5&lang=es&key=${MY_API_KEY}`)
      res.json(response.data)   
   }
   catch (err) {
@@ -125,18 +125,7 @@ server.get('/v1/forecast/:city' , async (req,res) => {
   
   try {
     if (city) {
-    const response = await axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&cnt=40&lang=sp&appid=${apiKey}`)
-    
-    let days = [response.data.list[0] , response.data.list[7], response.data.list[14], response.data.list[21] , response.data.list[28] ]
-    let forecast = {
-      city : city,
-      weather : days.map((d) => {
-        return {
-          date : d.dt,
-          
-        }
-      })
-    }
+    const response = await axios.get(`http://api.weatherapi.com/v1/forecast.json?q=${city}&hour=12&days=5&lang=es&key=${MY_API_KEY}`)
     res.json(response.data)  
       }
   }
