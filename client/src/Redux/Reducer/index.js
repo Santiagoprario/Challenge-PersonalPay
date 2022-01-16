@@ -25,7 +25,8 @@ const Reducer = (state=initialState, action) => {
              cityForecast : action.payload,
             }
     case SEARCH_FORECAST :
-         return {
+         
+        return {
              ...state,
              forecastCities : state.forecastCities.concat(action.payload),
             }  

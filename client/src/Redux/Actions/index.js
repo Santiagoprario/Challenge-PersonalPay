@@ -54,7 +54,7 @@ export function getForecast (city) {
 
 export function deleteCity (city) {
     return (dispatch) => { 
-        dispatch({type: REMOVE_CITY, city })
+        dispatch({type: REMOVE_CITY, payload : city })
     }
 }
 

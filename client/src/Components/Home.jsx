@@ -24,6 +24,7 @@ function Home() {
     
     function onClose(e) {
         console.log(e)
+        forecastCities = forecastCities.filter(d => d.location.name !== e);
         dispatch(deleteCity(e));
         console.log(forecastCities)
       }
