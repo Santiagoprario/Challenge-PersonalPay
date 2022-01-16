@@ -1,17 +1,31 @@
 import React from 'react';
 import style from './Styles/Weather.module.css';
+import Minmax from './Minmax';
 
-function Weather({name , date ,temp }) {
+function Weather({name, country, img, temp, condition, forecast, onClose}) {
     
-    
-
    
     return (
         <div className={style.container}>
-            <h2>{name}</h2>
-            <div>
-            <p></p>
-            <h1>{temp ? temp.toFixed(1): 'No se encontro la temperatura'}ºC</h1>
+            {onClose && <button onClick={onClose}>X</button> }
+            <section className={style.main}>
+            <h2 className={style.name}>{name}</h2>
+            <h4 className={style.country}>{country}</h4>
+            <h1 className={style.temp}>{temp ? temp+'ºC' : ''}</h1>
+            
+            </section>  
+            { 
+              img &&
+             <div className={style.condition}>
+              <img src={img} alt="" />
+              <p >{condition}</p>
+            </div>
+           }
+            <div className={style.forecast}>
+                {
+                    forecast && forecast.map((f) => 
+                    <Minmax date={f.date} day={f.day} img={f.day.condition.icon}/>)
+                }
             </div>
 
         </div>

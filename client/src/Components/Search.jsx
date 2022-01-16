@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux'
-import { getCity } from '../Redux/Actions/index';
+import { getForecast } from '../Redux/Actions/index';
 import style from './Styles/Search.module.css';
 
 function Search() {
@@ -10,7 +10,7 @@ function Search() {
     return (
         <form onSubmit={(e) => {
             e.preventDefault();
-            dispatch(getCity(city));
+            dispatch(getForecast(city));
           }}>
             <input
               className={style.input}

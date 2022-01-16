@@ -18,9 +18,12 @@ En este proyecto se utilizo la API <a href="https://www.weatherapi.com/" title="
 ## PRIMEROS PASOS
 <hr/>
 <br/>
+
+```
 Descargar el repositorio.
 Una vez descargado y descomprimido en nuestra pc, deberemos ejecutar el comando 'npm install' en la carpeta 'client' y en la carpeta 'api'.
 
+```
 
 ## BACKEND TEST
 <hr/>

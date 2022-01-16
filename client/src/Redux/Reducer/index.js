@@ -1,23 +1,34 @@
-import {GET_CITY , SEARCH_CITY} from '../Actions/index';
+import {GET_CURRENT , SEARCH_CURRENT , GET_FORECAST , SEARCH_FORECAST} from '../Actions/index';
 
 const initialState = {
-    city : {},
+    cityCurrent : {},
+    cityForecast : {},
     searchCities: false,
+    forecastCities: [],
 };
 
 const Reducer = (state=initialState, action) => {
     switch (action.type) {
-     
-     case GET_CITY :
+    case GET_CURRENT :
          return {
              ...state,
-             city : action.payload,
+             cityCurrent: action.payload,
          }
-    case SEARCH_CITY :
+    case SEARCH_CURRENT :
          return {
              ...state,
              searchCities : state.searchCities + action.payload,
          }
+    case GET_FORECAST :
+         return {
+             ...state,
+             cityForecast : action.payload,
+            }
+    case SEARCH_FORECAST :
+         return {
+             ...state,
+             forecastCities : state.forecastCities.concat(action.payload),
+            }     
     default :
     return state;
     }

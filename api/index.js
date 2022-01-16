@@ -42,31 +42,27 @@ server.get('/v1' , async (req, res) => {
          })
 
 server.get('/v1/location' , async (req, res) => {
-     
-    
-    
+    let ip = req.ip
     try {
-        
-       console.log('primero')
-       const miCity = await getIP ((err, ip) => {
+      if (ip !== '::1') {
+        const response = await axios.get(`http://ip-api.com/json/${ip}?fields=status,message,country,city,query`)
+        return res.json(response.data)
+      } 
+      const miCity = await getIP ((err, ip) => {
            axios.get(`http://ip-api.com/json/${ip}?fields=status,message,country,city,query`)
-           .then((res) => {
-             let ipDetails = res.data;
-             return ipDetails;
+           .then((respon) => {
+             let ipDetails = respon.data;
+             res.json(ipDetails)
            })
            .catch((err) => {
              res.json(err)
            })
          })
-        miCity.then((res))
-        const resp = Promise.all([miCity])
-        console.log(miCity)
-        res.json(resp)
      }
      catch (err) {
          res.send(err)
      }
-         })  
+    })  
 
 server.get('/v1/current' , async (req, res) => {
      try {
@@ -78,9 +74,12 @@ server.get('/v1/current' , async (req, res) => {
          })
        })
        let city = await ciudad;  
-        console.log(city)
         const response = await axios.get(`http://api.weatherapi.com/v1/forecast.json?q=${city}&hour=12&days=5&lang=es&key=${MY_API_KEY}`)
-        res.json(response.data)   
+        let current = {
+          location : response.data.location,
+          current : response.data.current
+        } 
+        return res.json(current) 
      }
      catch (err) {
          res.send(err)
@@ -92,7 +91,11 @@ server.get('/v1/current/:city' , async (req,res) => {
   if (citySelected) {
     try {
      const response = await axios.get(`http://api.weatherapi.com/v1/forecast.json?q=${citySelected}&hour=12&days=5&lang=es&key=${MY_API_KEY}`)
-       return res.json(response.data)  
+     let current = {
+       location : response.data.location,
+       current : response.data.current
+     } 
+     return res.json(current)  
     }
     catch (err) {
        return res.sendStatus(200).json(err)
@@ -110,9 +113,12 @@ server.get('/v1/forecast' , async (req, res) => {
       })
     })
     let city = await ciudad;  
-     console.log(city)
      const response = await axios.get(`http://api.weatherapi.com/v1/forecast.json?q=${city}&hour=12&days=5&lang=es&key=${MY_API_KEY}`)
-     res.json(response.data)   
+     let forecast = {
+      location : response.data.location,
+      forecast : response.data.forecast.forecastday
+    } 
+    return res.json(forecast)  
   }
   catch (err) {
       res.send(err)
@@ -121,16 +127,19 @@ server.get('/v1/forecast' , async (req, res) => {
 
 
 server.get('/v1/forecast/:city' , async (req,res) => {
-  let city = req.params.city
-  
-  try {
-    if (city) {
-    const response = await axios.get(`http://api.weatherapi.com/v1/forecast.json?q=${city}&hour=12&days=5&lang=es&key=${MY_API_KEY}`)
-    res.json(response.data)  
-      }
-  }
-  catch (err) {
-    res.sendStatus(404).json(err)
+  let citySelected = req.params.city
+  if (citySelected) {
+    try {
+     const response = await axios.get(`http://api.weatherapi.com/v1/forecast.json?q=${citySelected}&hour=12&days=5&lang=es&key=${MY_API_KEY}`)
+     let forecast = {
+       location : response.data.location,
+       forecast : response.data.forecast.forecastday
+     } 
+     return res.json(forecast)  
+    }
+    catch (err) {
+       return res.sendStatus(200).json(err)
+    }
   }
 })
 

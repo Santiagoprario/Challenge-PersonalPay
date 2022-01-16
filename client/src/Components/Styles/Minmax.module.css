@@ -1,0 +1,24 @@
+.container {
+    height: 150px;
+    width: 200px;
+    background-color: grey;
+    border: 1px solid black;
+    color: white;
+
+
+}
+.img{
+    margin-top: -15%;
+}
+
+.temp{
+    display: flex;
+    flex-direction: row;
+    font-size: 20px ;
+    color: whitesmoke;
+    justify-content: center;
+}
+.temp p {
+    padding-left: 5%;
+    padding-right: 5%;
+}

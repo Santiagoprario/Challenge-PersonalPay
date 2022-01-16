@@ -2,8 +2,7 @@ import React, {useEffect} from 'react';
 import { useDispatch , useSelector } from 'react-redux';
 import Search from './Search';
 import style from './Styles/Home.module.css';
-import Card from './Card';
-import { getCity } from '../Redux/Actions';
+import { getCurrent , getForecast } from '../Redux/Actions';
 import Weather from './Weather';
 
 
@@ -12,34 +11,44 @@ function Home() {
     
     const searchedCities = useSelector(state => state.searchCities);
     const dispatch = useDispatch();
-    const city = useSelector(state => state.city)
-    console.log(city)
+    const cityCurrent = useSelector(state => state.cityCurrent)
+    const cityForecast = useSelector(state => state.cityForecast)
+    const forecastCities = useSelector(state => state.forecastCities)
 
     useEffect(() => {
-        console.log('useeffect')
-        dispatch(getCity())
+        dispatch(getCurrent())
+        dispatch(getForecast())
     }, [])
     
-    const date = new Date(city.dt)
     
     
     return (
         <div className={style.container}>
+        <h2 className={style.title}>WEATHER APP CHALLENGE PERSONAL PAY</h2>
          <div className={style.actualWeather}>
-          {city ? <Weather 
-                 name={city.name}
-                 date={city.dt}
-                 temp={city.main}
+          {cityCurrent ? <Weather 
+                 name={cityCurrent.location?.name}
+                 country={cityCurrent?.location?.country}
+                 img={cityCurrent.current?.condition?.icon}
+                 condition={cityCurrent.current?.condition?.text}
+                 temp={cityCurrent.current?.temp_c}
+                 forecast={cityForecast?.forecast}
           /> : 'none'}
     
-         </div>   
+         </div>     
          <div className={style.search}>
          <Search />
          </div>
-
-
-
-
+         {forecastCities.length > 0 && forecastCities.map((f) => 
+             <Weather 
+             name={f.location.name}
+             country={f.location.country}
+            //  img={f.current?.condition.icon}
+            //  condition={f.current.condition.text}
+            //  temp={f.current.temp_c}
+             forecast={f.forecast}
+      />
+         )}
 
         </div>
     )
