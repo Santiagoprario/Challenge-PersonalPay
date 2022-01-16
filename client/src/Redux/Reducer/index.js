@@ -1,4 +1,4 @@
-import {GET_CURRENT , SEARCH_CURRENT , GET_FORECAST , SEARCH_FORECAST} from '../Actions/index';
+import {GET_CURRENT , SEARCH_CURRENT , GET_FORECAST , SEARCH_FORECAST , REMOVE_CITY} from '../Actions/index';
 
 const initialState = {
     cityCurrent : {},
@@ -28,7 +28,13 @@ const Reducer = (state=initialState, action) => {
          return {
              ...state,
              forecastCities : state.forecastCities.concat(action.payload),
-            }     
+            }  
+    case REMOVE_CITY :
+       console.log(action.payload)
+          return {
+            ...state,
+            forecastCities : state.forecastCities.filter((c) => c.location.name !== action.payload)
+        }   
     default :
     return state;
     }

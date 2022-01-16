@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import { useDispatch , useSelector } from 'react-redux';
 import Search from './Search';
 import style from './Styles/Home.module.css';
-import { getCurrent , getForecast } from '../Redux/Actions';
+import { getCurrent , getForecast , deleteCity } from '../Redux/Actions';
 import Weather from './Weather';
 
 
@@ -13,13 +13,20 @@ function Home() {
     const dispatch = useDispatch();
     const cityCurrent = useSelector(state => state.cityCurrent)
     const cityForecast = useSelector(state => state.cityForecast)
-    const forecastCities = useSelector(state => state.forecastCities)
+    let forecastCities = (useSelector(state => state.forecastCities))
 
     useEffect(() => {
         dispatch(getCurrent())
         dispatch(getForecast())
     }, [])
     
+ 
+    
+    function onClose(e) {
+        console.log(e)
+        dispatch(deleteCity(e));
+        console.log(forecastCities)
+      }
     
     
     return (
@@ -43,10 +50,8 @@ function Home() {
              <Weather 
              name={f.location.name}
              country={f.location.country}
-            //  img={f.current?.condition.icon}
-            //  condition={f.current.condition.text}
-            //  temp={f.current.temp_c}
              forecast={f.forecast}
+             onClose={() => onClose(f.location.name)}
       />
          )}
 

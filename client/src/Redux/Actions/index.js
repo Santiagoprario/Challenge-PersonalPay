@@ -3,6 +3,7 @@ export const GET_CURRENT = 'GET_CURRENT';
 export const SEARCH_CURRENT = 'SEARCH_CURRENT';
 export const GET_FORECAST = 'GET_FORECAST';
 export const SEARCH_FORECAST = 'SEARCH_FORECAST';
+export const REMOVE_CITY = 'REMOVE_CITY';
 
 export function getCurrent (city) {
     if (!city) { 
@@ -51,4 +52,9 @@ export function getForecast (city) {
   }
 }
 
+export function deleteCity (city) {
+    return (dispatch) => { 
+        dispatch({type: REMOVE_CITY, city })
+    }
+}
 

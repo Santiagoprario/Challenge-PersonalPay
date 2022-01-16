@@ -2,12 +2,13 @@ import React from 'react';
 import style from './Styles/Weather.module.css';
 import Minmax from './Minmax';
 
-function Weather({name, country, img, temp, condition, forecast, onClose}) {
+
+function Weather({name, country, img, temp, condition, forecast, onClose }) {
     
-   
+
     return (
         <div className={style.container}>
-            {onClose && <button onClick={onClose}>X</button> }
+            {!img && <button className={style.close} onClick={onClose}>X</button> }
             <section className={style.main}>
             <h2 className={style.name}>{name}</h2>
             <h4 className={style.country}>{country}</h4>
@@ -24,7 +25,7 @@ function Weather({name, country, img, temp, condition, forecast, onClose}) {
             <div className={style.forecast}>
                 {
                     forecast && forecast.map((f) => 
-                    <Minmax date={f.date} day={f.day} img={f.day.condition.icon}/>)
+                    <Minmax  date={f.date} day={f.day} img={f.day.condition.icon}/>)
                 }
             </div>
 

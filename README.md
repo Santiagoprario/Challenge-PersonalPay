@@ -28,7 +28,7 @@ Una vez descargado y descomprimido en nuestra pc, deberemos ejecutar el comando 
 ## BACKEND TEST
 <hr/>
 <br/>
-Ya con todas las dependencias instaladas, se debera ejecutar primero el Servidor, el cual se encuentra en la carpeta 'api'. La ejecucion sera en dicha carpeta, con el comando: 'node index.js'.
+Ya con todas las dependencias instaladas, se debera ejecutar primero el Servidor, el cual se encuentra en la carpeta 'api'. La ejecucion sera en dicha carpeta, con el comando: 'npm start'.
 
 El servidor se realizo sobre Express. A continuacion se detallan los ENDPOINTS funcionales:
 
