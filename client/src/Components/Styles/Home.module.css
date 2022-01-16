@@ -1,0 +1,14 @@
+
+
+.container {
+
+}
+
+
+
+.search {
+    display: block;
+    height: 80px;
+    border: 1px solid black;
+    margin-top: 10%;
+}
