@@ -147,3 +147,5 @@ server.get('/v1/forecast/:city' , async (req,res) => {
 server.listen(3001, () => {
     console.log('Server operating on port 3001')
 })
+
+module.exports = server;

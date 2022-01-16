@@ -65,3 +65,8 @@ Los datos son consumidos del localhost:3001 , por ello es importante correr prim
 </p>
 
 
+## TESTING
+<hr/>
+<br/>
+Ejecutar el comando 'npm test'.
+Se testearon los Status de las rutas de la API. Se uso Mocha como framework de testeo, chai para libreria de assertions y supertest para levantar el servidor.
