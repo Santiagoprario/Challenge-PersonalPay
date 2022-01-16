@@ -134,7 +134,8 @@ server.get('/v1/forecast/:city' , async (req,res) => {
      if (response.status !== 200) return res.json({msg : 'No se ha encontrado la ciudad solicitada'})
      let forecast = {
        location : response.data.location,
-       forecast : response.data.forecast.forecastday
+       forecast : response.data.forecast.forecastday,
+       actualTemp : response.data.current.temp_c
      } 
      return res.json(forecast)  
     }

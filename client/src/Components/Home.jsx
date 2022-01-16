@@ -52,6 +52,7 @@ function Home() {
              name={f.location.name}
              country={f.location.country}
              forecast={f.forecast}
+             temp={f.actualTemp}
              onClose={() => onClose(f.location.name)}
       />
          )}
