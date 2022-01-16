@@ -1,7 +1,15 @@
 .input {
+    background-image: url('../../../public/search.png');
+    background-repeat: no-repeat;
+    background-size: 30px;
+    
+    background-position: 4px center;
     height: 30px;
     margin-top: 1%;
     font-size: 20px;
     width: 700px;
     border-radius: 15px;
+    border: 3px solid rgb(62, 128, 244);
+    padding-left: 35px;
+    justify-content: center;
 }

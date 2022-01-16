@@ -20,12 +20,17 @@ const Reducer = (state=initialState, action) => {
              searchCities : state.searchCities + action.payload,
          }
     case GET_FORECAST :
-         return {
+        
+       return {
              ...state,
              cityForecast : action.payload,
             }
     case SEARCH_FORECAST :
-        if (state.forecastCities.length === 5) {
+       if(action.payload === 'OK') {
+        window.confirm('No se ha podido encontrar la Ciudad solicitada. Intente de otra manera.')   
+        return state
+       }
+       if (state.forecastCities.length === 5) {
             return state;
         }
         return {

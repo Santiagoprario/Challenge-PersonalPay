@@ -10,7 +10,8 @@ function Search() {
     return (
         <form onSubmit={(e) => {
             e.preventDefault();
-            dispatch(getForecast(city));
+            dispatch(getForecast(city))
+            ;
           }}>
             <input
               className={style.input}

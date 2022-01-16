@@ -131,6 +131,7 @@ server.get('/v1/forecast/:city' , async (req,res) => {
   if (citySelected) {
     try {
      const response = await axios.get(`http://api.weatherapi.com/v1/forecast.json?q=${citySelected}&hour=12&days=5&lang=es&key=${MY_API_KEY}`)
+     if (response.status !== 200) return res.json({msg : 'No se ha encontrado la ciudad solicitada'})
      let forecast = {
        location : response.data.location,
        forecast : response.data.forecast.forecastday
@@ -138,7 +139,7 @@ server.get('/v1/forecast/:city' , async (req,res) => {
      return res.json(forecast)  
     }
     catch (err) {
-       return res.sendStatus(200).json(err)
+       return res.sendStatus(200).json({msg: 'No se ha encontrado la ciudad solicitada'})
     }
   }
 })
