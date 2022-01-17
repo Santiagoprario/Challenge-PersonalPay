@@ -11,13 +11,18 @@ function Home() {
     
     const searchedCities = useSelector(state => state.searchCities);
     const dispatch = useDispatch();
-    const cityCurrent = useSelector(state => state.cityCurrent)
+    let cityCurrent = useSelector(state => state.cityCurrent)
     const cityForecast = useSelector(state => state.cityForecast)
     let forecastCities = (useSelector(state => state.forecastCities))
 
     useEffect(() => {
         dispatch(getCurrent())
         dispatch(getForecast())
+        setTimeout(() => 
+        {
+            dispatch(getCurrent())
+            dispatch(getForecast())
+        }, 2000);
     }, [])
     
  

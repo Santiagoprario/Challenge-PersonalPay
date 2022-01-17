@@ -66,20 +66,22 @@ server.get('/v1/location' , async (req, res) => {
 
 server.get('/v1/current' , async (req, res) => {
      try {
-        const miCity = await getIP ((err, ip) => {
+      let miCity = await getIP ((err, ip) => {
            axios.get(`http://ip-api.com/json/${ip}?fields=status,message,country,city,query`)
            .then((res) => {
-              ciudad = res.data.city;
-             return ciudad;
-         })
+             city = res.data.city;
+             return city;
+           })
+           .catch((err) => {
+             console.error(err)
+           })
        })
-       let city = await ciudad;  
-        const response = await axios.get(`http://api.weatherapi.com/v1/forecast.json?q=${city}&hour=12&days=5&lang=es&key=${MY_API_KEY}`)
-        let current = {
+       const response = await axios.get(`http://api.weatherapi.com/v1/forecast.json?q=${city}&hour=12&days=5&lang=es&key=${MY_API_KEY}`)
+       let current = {
           location : response.data.location,
           current : response.data.current
         } 
-        return res.json(current) 
+        Promise.race([miCity , response ]).then(() => {res.json(current)}).catch(function(err) {console.error(err);})
      }
      catch (err) {
          res.send(err)
@@ -98,7 +100,7 @@ server.get('/v1/current/:city' , async (req,res) => {
      return res.json(current)  
     }
     catch (err) {
-       return res.sendStatus(200).json(err)
+       return res.sendStatus(404).json(err)
     }
   }
 })
@@ -131,7 +133,7 @@ server.get('/v1/forecast/:city' , async (req,res) => {
   if (citySelected) {
     try {
      const response = await axios.get(`http://api.weatherapi.com/v1/forecast.json?q=${citySelected}&hour=12&days=5&lang=es&key=${MY_API_KEY}`)
-     if (response.status !== 200) return res.json({msg : 'No se ha encontrado la ciudad solicitada'})
+     if (response.status !== 200) return res.sendStatus(404).json({msg : 'No se ha encontrado la ciudad solicitada'})
      let forecast = {
        location : response.data.location,
        forecast : response.data.forecast.forecastday,
