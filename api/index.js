@@ -66,23 +66,28 @@ server.get('/v1/location' , async (req, res) => {
 
 server.get('/v1/current' , async (req, res) => {
      try {
-      let miCity = await getIP ((err, ip) => {
+       await getIP ((err, ip) => {
            axios.get(`http://ip-api.com/json/${ip}?fields=status,message,country,city,query`)
            .then((res) => {
              city = res.data.city;
              return city;
            })
+           .then((city) => {
+            const resp = axios.get(`http://api.weatherapi.com/v1/forecast.json?q=${city}&hour=12&days=5&lang=es&key=${MY_API_KEY}`)
+            return resp
+          })
+           .then((response) => { 
+             let current = {
+               location : response.data.location,
+               current : response.data.current
+               }
+             res.json(current) 
+           })
            .catch((err) => {
              console.error(err)
            })
        })
-       const response = await axios.get(`http://api.weatherapi.com/v1/forecast.json?q=${city}&hour=12&days=5&lang=es&key=${MY_API_KEY}`)
-       let current = {
-          location : response.data.location,
-          current : response.data.current
-        } 
-        Promise.race([miCity , response ]).then(() => {res.json(current)}).catch(function(err) {console.error(err);})
-     }
+      }
      catch (err) {
          res.send(err)
      }
@@ -107,20 +112,27 @@ server.get('/v1/current/:city' , async (req,res) => {
 
 server.get('/v1/forecast' , async (req, res) => {
   try {
-     const miCity = await getIP ((err, ip) => {
-        axios.get(`http://ip-api.com/json/${ip}?fields=status,message,country,city,query`)
-        .then((res) => {
-           ciudad = res.data.city;
-          return ciudad;
+    await getIP ((err, ip) => {
+      axios.get(`http://ip-api.com/json/${ip}?fields=status,message,country,city,query`)
+      .then((res) => {
+        city = res.data.city;
+        return city;
+      })
+      .then((city) => {
+       const resp = axios.get(`http://api.weatherapi.com/v1/forecast.json?q=${city}&hour=12&days=5&lang=es&key=${MY_API_KEY}`)
+       return resp
+     })
+      .then((response) => { 
+        let forecast = {
+          location : response.data.location,
+          forecast : response.data.forecast.forecastday
+        } 
+        return res.json(forecast) 
+      })
+      .catch((err) => {
+        console.error(err)
       })
     })
-    let city = await ciudad;  
-     const response = await axios.get(`http://api.weatherapi.com/v1/forecast.json?q=${city}&hour=12&days=5&lang=es&key=${MY_API_KEY}`)
-     let forecast = {
-      location : response.data.location,
-      forecast : response.data.forecast.forecastday
-    } 
-    return res.json(forecast)  
   }
   catch (err) {
       res.send(err)
