@@ -28,6 +28,7 @@ Una vez descargado y descomprimido en nuestra pc, deberemos ejecutar el comando 
 ## BACKEND TEST
 <hr/>
 <br/>
+***Se hizo deploy de la APP para probar su funcionamiento en 'https://personal-pay-challenge.herokuapp.com/v1/' con todas las rutas funcionando***
 Ya con todas las dependencias instaladas, se debera ejecutar primero el Servidor, el cual se encuentra en la carpeta 'api'. La ejecucion sera en dicha carpeta, con el comando: 'npm start'.
 
 El servidor se realizo sobre Express. A continuacion se detallan los ENDPOINTS funcionales:
